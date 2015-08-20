@@ -36,11 +36,26 @@ public abstract class Page {
   public Page ensurePageLoaded() {
 	  return this;
   }
-
+  
   //ждёт загрузки страницы и возвращает 1 или 0
   public boolean waitPageLoaded() {
 	  try {
 		  ensurePageLoaded();
+		  return true;
+	  } catch (TimeoutException to) {
+		  return false;
+	  }
+	}
+  
+  //ждёт ждёт появление элемента и возвращает имя стрницы
+  public Page ensureElementVisible() {
+	  return this;
+  }
+  
+//ждёт ждёт появление элемента и возвращает 1 или 0
+  public boolean waitElementVisible() {
+	  try {
+		  ensureElementVisible();
 		  return true;
 	  } catch (TimeoutException to) {
 		  return false;

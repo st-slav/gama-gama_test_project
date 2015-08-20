@@ -1,9 +1,11 @@
 package gm.sel.applogic;
 
 import java.io.IOException;
+
+import gm.sel.model.User;
 import gm.sel.pages.HomePage;
 
-public class AuthHelper extends AppManage {
+public class AuthHelper extends DriverHelper {
 
 	public AuthHelper(AppManage manage){
 		super(manage.getWebDriver());
@@ -11,9 +13,11 @@ public class AuthHelper extends AppManage {
 	
 	@Override
 	public void loginAs(User user) {
-		pages.HomePage.ensurePageLoaded()
-			.setUsernameField(user.getLogin())
+		pages.homePage.ensurePageLoaded()
+			.clikEnterButton()
+			.ensureElementVisible()
+			.setUsernameField(user.getEmail())
 			.setPasswordField(user.getPassword())
-			.clickSubmitButton();
+			.clickEnterButtonAuth();
 	  }
 }
