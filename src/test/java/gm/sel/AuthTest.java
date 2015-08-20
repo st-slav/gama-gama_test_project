@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import gm.sel.pages.HomePage;
 
-public class SampleTestNgTest extends TestNgTestBase {
+public class AuthTest extends TestNgTestBase {
 
   private HomePage homepage;
 
