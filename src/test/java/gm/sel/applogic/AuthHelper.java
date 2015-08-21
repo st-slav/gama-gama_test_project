@@ -11,13 +11,12 @@ public class AuthHelper extends DriverHelper {
 		super(manage.getWebDriver());
 	}
 	
-	@Override
 	public void loginAs(User user) {
 		pages.homePage.ensurePageLoaded()
-			.clikEnterButton()
-			.ensureElementVisible()
-			.setUsernameField(user.getEmail())
-			.setPasswordField(user.getPassword())
-			.clickEnterButtonAuth();
+			.clickEnterLink()
+			.ensureAuthFormVisibl()
+			.setEmailField(user.getEmail())
+			.setPassField(user.getPass())
+			.clickEnterButton();
 	  }
 }

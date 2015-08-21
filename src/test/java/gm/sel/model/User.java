@@ -3,7 +3,7 @@ package gm.sel.model;
 public class User {
 
 	private String email;
-	private String password;
+	private String pass;
 
 	public String getEmail() {
 		return email;
@@ -12,11 +12,11 @@ public class User {
 		this.email = email;
 		return this;
 	}
-	public String getPassword() {
-		return password;
+	public String getPass() {
+		return pass;
 	}
-	public User setPassword(String password) {
-		this.password = password;
+	public User setPass(String pass) {
+		this.pass = pass;
 		return this;
 	}
 }

@@ -52,7 +52,7 @@ public abstract class Page {
 	  return this;
   }
   
-//ждёт ждёт появление элемента и возвращает 1 или 0
+  //ждёт появление элемента и возвращает 1 или 0
   public boolean waitElementVisible() {
 	  try {
 		  ensureElementVisible();

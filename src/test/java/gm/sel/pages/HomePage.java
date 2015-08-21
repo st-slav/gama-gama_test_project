@@ -1,15 +1,13 @@
 package gm.sel.pages;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
-//presenceOfElementLocated;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
-
+//import org.openqa.selenium.support.How;
 /**
  * Sample page
  */
@@ -25,20 +23,63 @@ public class HomePage extends Page {
   
   @FindBy(xpath = "//div[@id='top_back']//a[@href='javascript:GamaGama.UI.showAuthForm();']")
   @CacheLookup
-  public WebElement enterLink;
+  private WebElement enterLink;
   
-  public void clickEnterLink(){
+  public HomePage clickEnterLink(){
 	  enterLink.click();
+	  return this;
+  }
+
+  @FindBy(name = "Email")
+  @CacheLookup
+  private WebElement emailField;
+  
+  public HomePage setEmailField(String text) {
+	    emailField.sendKeys(text);
+	    return this;
   }
   
+  @FindBy(name = "Password")
+  @CacheLookup
+  private WebElement passField;
   
+  public HomePage setPassField(String text) {
+	    emailField.sendKeys(text);
+	    return this;
+  }  
+  
+  @FindBy(xpath = "//div[@id='authblock']//button[@class='btn-small btn-blue auth_submit-block js-login']")
+  @CacheLookup
+  private WebElement enterButton;
+  
+  public HomePage clickEnterButton() {
+	  enterButton.click();
+	  return this;
+  }
+  
+  @FindBy(xpath = "//div[@id='top_back']//a[@class='white logout' and @href='#']")
+  @CacheLookup
+  private WebElement logoutLink;
+  
+  public HomePage clikLogoutLink() {
+	  enterButton.click();
+	  return this;
+  }
   
   public HomePage ensurePageLoaded(){
 	  super.ensurePageLoaded();
 //	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='sh_button']")));
 	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='u_0_6']")));
+	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='top_back']//a[@href='javascript:GamaGama.UI.showAuthForm();']")));
 	  return this;
   }  
+
+  public HomePage ensurePageLoadedLogIn(){
+	  super.ensurePageLoaded();
+	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='u_0_6']")));
+	  wait.until(presenceOfElementLocated(By.xpath("//a[@href='/personal/settings/']")));
+	  return this;	  
+  }
   
   public HomePage ensureAuthFormVisibl(){
 	  super.ensureElementVisible();
@@ -46,5 +87,4 @@ public class HomePage extends Page {
 	  return this;
   }
 //div[@id='colorbox']
-  
 }
