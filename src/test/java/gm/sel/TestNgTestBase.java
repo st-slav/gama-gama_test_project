@@ -45,7 +45,7 @@ public class TestNgTestBase {
     driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
   }*/
 
-  @AfterSuite(alwaysRun = true)
+  @AfterSuite//(alwaysRun = true)
   public void stop() {
 	  app.stop();
   }

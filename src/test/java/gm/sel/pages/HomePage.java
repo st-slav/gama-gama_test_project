@@ -30,7 +30,7 @@ public class HomePage extends Page {
 	  return this;
   }
 
-  @FindBy(name = "Email")
+  @FindBy(xpath = "//input[@name='Email']")
   @CacheLookup
   private WebElement emailField;
   
@@ -39,12 +39,12 @@ public class HomePage extends Page {
 	    return this;
   }
   
-  @FindBy(name = "Password")
+  @FindBy(xpath = "//input[@class='auth_form_pass']")
   @CacheLookup
   private WebElement passField;
   
   public HomePage setPassField(String text) {
-	    emailField.sendKeys(text);
+	    passField.sendKeys(text);
 	    return this;
   }  
   
@@ -66,17 +66,28 @@ public class HomePage extends Page {
 	  return this;
   }
   
+  @FindBy(xpath = "//button[@id='cboxClose']")
+  @CacheLookup
+  private WebElement closeAuthForm;
+  
+  public HomePage clikCloseAuthForm() {
+	  closeAuthForm.click();
+	  return this;
+  }
+  
   public HomePage ensurePageLoaded(){
 	  super.ensurePageLoaded();
 //	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='sh_button']")));
-	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='u_0_6']")));
+//	  driver.switchTo().Frame();
+	  wait.until(presenceOfElementLocated(By.xpath("//iframe[@title='fb:like_box Facebook Social Plugin']")));
+//	  driver.SwitchTo().DefaultContent();
 	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='top_back']//a[@href='javascript:GamaGama.UI.showAuthForm();']")));
 	  return this;
   }  
 
   public HomePage ensurePageLoadedLogIn(){
 	  super.ensurePageLoaded();
-	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='u_0_6']")));
+	  wait.until(presenceOfElementLocated(By.xpath("//iframe[@title='fb:like_box Facebook Social Plugin']")));
 	  wait.until(presenceOfElementLocated(By.xpath("//a[@href='/personal/settings/']")));
 	  return this;	  
   }

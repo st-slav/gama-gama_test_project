@@ -2,8 +2,9 @@ package gm.sel.applogic;
 
 import java.io.IOException;
 
+import org.openqa.selenium.TimeoutException;
+
 import gm.sel.model.User;
-import gm.sel.pages.HomePage;
 
 public class AuthHelper extends DriverHelper {
 
@@ -17,6 +18,34 @@ public class AuthHelper extends DriverHelper {
 			.ensureAuthFormVisibl()
 			.setEmailField(user.getEmail())
 			.setPassField(user.getPass())
-			.clickEnterButton();
+			.clickEnterButton()
+			.ensurePageLoadedLogIn();
 	  }
+	
+	public boolean isLoginIn(){
+		try{
+			pages.homePage.ensurePageLoadedLogIn();
+			return true;
+		} catch (TimeoutException to) {
+			  return false;
+		}
+	}
+	
+	public void logout(){
+		pages.homePage.clikLogoutLink()
+			.ensurePageLoaded();
+	}
+	
+	public void closeAuthForm(){
+		pages.homePage.clikCloseAuthForm().ensurePageLoaded();
+	}
+	
+	public boolean isAuthFormIn(){
+		try{
+			pages.homePage.ensureAuthFormVisibl();
+			return true;
+		} catch (TimeoutException to){
+			return false;
+		}
+	}
 }
