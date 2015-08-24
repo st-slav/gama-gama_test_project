@@ -13,6 +13,18 @@ import gm.sel.pages.HomePage;
 
 public class AuthTest extends TestNgTestBase {
 
+  @AfterMethod
+  public void postConditions() throws Exception {
+	  if (app.getAuthHelper().isLoginIn()){
+		  app.getAuthHelper().logout();
+//		  System.out.println("fuck1");
+	  } else if (app.getAuthHelper().isAuthFormIn()){
+		  app.getAuthHelper().closeAuthForm();
+//		  System.out.println("fuck2");
+	  } else return;
+//		  Assert.assertFalse(app.getAuthHelper().isLoginIn());
+  }  	
+	
   @Test
   public void testLogIn() throws Exception {
     User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
@@ -21,14 +33,5 @@ public class AuthTest extends TestNgTestBase {
     Assert.assertTrue(app.getAuthHelper().isLoginIn());
   }
   
-  //@AfterMethod
-  @Test
-  public void postConditions() throws Exception {
-	  if (app.getAuthHelper().isLoginIn()){
-		  app.getAuthHelper().logout();
-	  } else if (app.getAuthHelper().isAuthFormIn()){
-		  app.getAuthHelper().closeAuthForm();
-	  }
-	  Assert.assertFalse(app.getAuthHelper().isLoginIn());
-  }
+
 }

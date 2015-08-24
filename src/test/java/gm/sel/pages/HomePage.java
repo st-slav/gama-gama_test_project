@@ -62,7 +62,7 @@ public class HomePage extends Page {
   private WebElement logoutLink;
   
   public HomePage clikLogoutLink() {
-	  enterButton.click();
+	  logoutLink.click();
 	  return this;
   }
   
