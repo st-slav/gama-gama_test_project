@@ -13,14 +13,22 @@ public class AuthHelper extends DriverHelper {
 	}
 	
 	public void loginAs(User user) {
+		this.inputDataiInForm(user);
+		pages.homePage.clickEnterButton();
+			//.ensurePageLoadedLogIn();
+	  }
+	
+	public void inputDataiInForm(User user){
 		pages.homePage.ensurePageLoaded()
 			.clickEnterLink()
 			.ensureAuthFormVisibl()
 			.setEmailField(user.getEmail())
-			.setPassField(user.getPass())
-			.clickEnterButton()
-			.ensurePageLoadedLogIn();
-	  }
+			.setPassField(user.getPass());
+	}
+	
+	public boolean compareTextErrorMessageInForm(String text){
+		return pages.homePage.getTextErrorMessageInForm() == text;
+	}
 	
 	public boolean isLoginIn(){
 		try{
@@ -37,7 +45,7 @@ public class AuthHelper extends DriverHelper {
 	}
 	
 	public void closeAuthForm(){
-		pages.homePage.clikCloseAuthForm().ensurePageLoaded();
+		pages.homePage.clikCloseAuthFormButton().ensurePageLoaded();
 	}
 	
 	public boolean isAuthFormIn(){

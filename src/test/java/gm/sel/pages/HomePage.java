@@ -68,10 +68,24 @@ public class HomePage extends Page {
   
   @FindBy(xpath = "//button[@id='cboxClose']")
   @CacheLookup
-  private WebElement closeAuthForm;
+  private WebElement closeAuthFormButton;
   
-  public HomePage clikCloseAuthForm() {
-	  closeAuthForm.click();
+  public HomePage clikCloseAuthFormButton() {
+	  closeAuthFormButton.click();
+	  return this;
+  }
+  
+  @FindBy(xpath = "//div[@id='authblock']//div[@class='status-error']")
+  @CacheLookup
+  private WebElement errorMessageInForm;
+  
+  public String getTextErrorMessageInForm(){
+	  return errorMessageInForm.getText();
+  }
+  
+  public HomePage ensureErrorAuthForm(){
+	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='authblock']//div[@class='status-error' and not (text() = null)]")));
+	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='authblock']//div[@class='status-message' and (text() = null)]")));
 	  return this;
   }
   
@@ -81,7 +95,7 @@ public class HomePage extends Page {
 //	  driver.switchTo().Frame();
 	  wait.until(presenceOfElementLocated(By.xpath("//iframe[@title='fb:like_box Facebook Social Plugin']")));
 //	  driver.SwitchTo().DefaultContent();
-	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='top_back']//a[@href='javascript:GamaGama.UI.showAuthForm();']")));
+	  wait.until(elementToBeClickable(enterLink));
 	  return this;
   }  
 
@@ -97,5 +111,5 @@ public class HomePage extends Page {
 	  wait.until(visibilityOfElementLocated(By.xpath("//div[@id='colorbox']")));
 	  return this;
   }
-//div[@id='colorbox']
+
 }

@@ -26,11 +26,18 @@ public class AuthTest extends TestNgTestBase {
   }  	
 	
   @Test
-  public void testLogIn() throws Exception {
+  public void testLogInTrue() throws Exception {
     User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
     app.getAuthHelper().loginAs(user);
 //    Assert.assertFalse("".equals(homepage.header.getText()));
     Assert.assertTrue(app.getAuthHelper().isLoginIn());
+  }
+  
+  @Test
+  public void testLogInEmailEmptyPassEmpty() throws Exception {
+	  User user = new User().setEmail(null).setPass(null);
+	  app.getAuthHelper().loginAs(user);
+	  
   }
   
 
