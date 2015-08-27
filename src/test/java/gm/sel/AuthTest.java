@@ -10,19 +10,13 @@ public class AuthTest extends TestNgTestBase {
 
   @AfterMethod
   public void postConditions() throws Exception {
-	  if (app.getAuthHelper().isLoginIn()){
-		  app.getAuthHelper().logout();
-	  } else if (app.getAuthHelper().isAuthFormIn()){
+	  if (app.getAuthHelper().isAuthFormIn()){
 		  app.getAuthHelper().closeAuthForm();
+	  } else if ( app.getAuthHelper().isLoginIn()){
+		  
+		  app.getAuthHelper().logout();
 	  };
   }  	
-
-  @Test
-  public void testLogInTrue_2() throws Exception {
-    User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
-    app.getAuthHelper().loginAs(user);
-    Assert.assertTrue(app.getAuthHelper().isLoginIn());
-  }
   
   @Test
   public void testLogInEmailEmptyPassEmpty_7() throws Exception {
@@ -39,22 +33,12 @@ public class AuthTest extends TestNgTestBase {
   }
 
   @Test
-  public void testLogInEmailRegistryPassWrong_4(){
-	  User user = new User().setEmail("st.mam@yandex.ru").setPass("22");
-	  app.getAuthHelper().loginAs(user);
-	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Неправильный пароль. Восстановить"));
-	  Assert.assertTrue(app.getAuthHelper().restorePassLinkVisible());
-	  app.getAuthHelper().restorePass();
-	  Assert.assertTrue(app.getAuthHelper().compareTextStatusMessageInForm("Инструкция по восстановлению отправлена"));
-  }
-
-  @Test
   public void testILosePassEmailRegistryPassWrong_3(){
 	  User user = new User().setEmail("st.mam@yandex.ru").setPass("22");
 	  app.getAuthHelper().recoveryPass(user);
 	  Assert.assertTrue(app.getAuthHelper().compareTextStatusMessageInForm("Инструкция по восстановлению отправлена"));
   }
-  
+ 
   @Test
   public void testILosePassEmailNotRegister_8(){
 	  User user = new User().setEmail("a@a.a").setPass(null);
@@ -98,5 +82,22 @@ public class AuthTest extends TestNgTestBase {
 	  app.getAuthHelper().registration(user);
 	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("E-Mail некорректный"));
   }
- 
+
+  @Test
+  public void testLogInEmailRegistryPassWrong_4(){
+	  User user = new User().setEmail("st.mam@yandex.ru").setPass("22");
+	  app.getAuthHelper().loginAs(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Неправильный пароль. Восстановить"));
+	  Assert.assertTrue(app.getAuthHelper().restorePassLinkVisible());
+	  app.getAuthHelper().restorePass();
+	  Assert.assertTrue(app.getAuthHelper().compareTextStatusMessageInForm("Инструкция по восстановлению отправлена"));
+  }
+  
+  @Test
+  public void testLogInTrue_2() throws Exception {
+    User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
+    app.getAuthHelper().loginAs(user);
+    Assert.assertTrue(app.getAuthHelper().isLoginIn());
+  }
+
 }

@@ -24,7 +24,6 @@ public class AuthHelper extends DriverHelper {
 	}
 	
 	public boolean compareTextErrorMessageInForm(String text){
-		System.out.println(pages.homePage.ensureErrorAuthForm().getTextErrorMessageInForm());
 		return pages.homePage.ensureErrorAuthForm().getTextErrorMessageInForm().equals(text);
 	}
 	
