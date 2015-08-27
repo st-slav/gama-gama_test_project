@@ -2,20 +2,16 @@ package gm.sel.pages;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
-//import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-//import org.openqa.selenium.support.How;
 /**
  * Sample page
  */
 public class HomePage extends Page {
-
-/*  @FindBy(how = How.TAG_NAME, using = "h1")
-  @CacheLookup
-  public WebElement header;*/
 
   public HomePage(PageManage pages) {
     super(pages);
@@ -35,6 +31,7 @@ public class HomePage extends Page {
   private WebElement emailField;
   
   public HomePage setEmailField(String text) {
+	    emailField.clear();
 	    emailField.sendKeys(text);
 	    return this;
   }
@@ -44,6 +41,7 @@ public class HomePage extends Page {
   private WebElement passField;
   
   public HomePage setPassField(String text) {
+	    passField.clear();
 	    passField.sendKeys(text);
 	    return this;
   }  
@@ -52,9 +50,8 @@ public class HomePage extends Page {
   @CacheLookup
   private WebElement enterButton;
   
-  public HomePage clickEnterButton() {
+  public void clickEnterButton() {
 	  enterButton.click();
-	  return this;
   }
   
   @FindBy(xpath = "//div[@id='top_back']//a[@class='white logout' and @href='#']")
@@ -84,32 +81,79 @@ public class HomePage extends Page {
   }
   
   public HomePage ensureErrorAuthForm(){
-	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='authblock']//div[@class='status-error' and not (text() = null)]")));
-	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='authblock']//div[@class='status-message' and (text() = null)]")));
+	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='cboxContent']//div[@class='status-error' and (text())]")));
+	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='cboxContent']//div[@class='status-message' and not (text())]")));
+	  return this;
+  }
+  
+  public HomePage ensureStatusMessageAuthForm(){
+	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='cboxContent']//div[@class='status-error' and not (text())]")));
+	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='cboxContent']//div[@class='status-message' and (text())]")));
+	  try {
+		  TimeUnit.SECONDS.sleep(3);
+	  } catch (InterruptedException e) {
+		  e.printStackTrace();
+	  }
 	  return this;
   }
   
   public HomePage ensurePageLoaded(){
-	  super.ensurePageLoaded();
-//	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='sh_button']")));
-//	  driver.switchTo().Frame();
+//	  super.ensurePageLoaded();
 	  wait.until(presenceOfElementLocated(By.xpath("//iframe[@title='fb:like_box Facebook Social Plugin']")));
-//	  driver.SwitchTo().DefaultContent();
 	  wait.until(elementToBeClickable(enterLink));
 	  return this;
   }  
 
   public HomePage ensurePageLoadedLogIn(){
-	  super.ensurePageLoaded();
+//	  super.ensurePageLoaded();
 	  wait.until(presenceOfElementLocated(By.xpath("//iframe[@title='fb:like_box Facebook Social Plugin']")));
 	  wait.until(presenceOfElementLocated(By.xpath("//a[@href='/personal/settings/']")));
 	  return this;	  
   }
   
   public HomePage ensureAuthFormVisibl(){
-	  super.ensureElementVisible();
-	  wait.until(visibilityOfElementLocated(By.xpath("//div[@id='colorbox']")));
+//	  super.ensureElementVisible();
+	  wait.until(visibilityOfElementLocated(By.xpath("//div[@id='cboxContent']/div[@id='cboxLoadedContent']/div[@id='authblock']")));
+	  return this;
+  }
+  
+  @FindBy(xpath = "//a[@class='noreload auth_remind-password' and @href='#']")
+  @CacheLookup
+  private WebElement restorePassLink;
+  
+  public void clickRestorePassLink(){
+	  restorePassLink.click();
+  }
+  
+  public HomePage ensureElementRestorePassLink(){
+	  wait.until(presenceOfElementLocated(By.xpath("//a[@class='noreload auth_remind-password' and @href='#']")));
+	  return this;
+  }
+  
+  @FindBy(xpath = "//div[@id='authblock']//div[@class='status-message']")
+  @CacheLookup
+  private WebElement statusMessageInForm;
+  
+  public String getTextStatusMessageInForm(){
+	  return statusMessageInForm.getText();
+  }
+
+  @FindBy(xpath = "//div[@id='cboxContent']//a[@class='noreload auth_remind-password js-remind-pwd' and @href='#']")
+  @CacheLookup
+  private WebElement iLosePassLink;
+  
+  public HomePage clicILosePassLink() {
+	  iLosePassLink.click();
 	  return this;
   }
 
+  @FindBy(xpath = "//div[@id='cboxContent']//a[@class='noreload auth_create-account js-register-acc']")
+  @CacheLookup
+  private WebElement createAccountLink;
+  
+  public HomePage clickCreateAccount() {
+	  createAccountLink.click();
+	  return this;
+  }
+  
 }

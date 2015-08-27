@@ -1,15 +1,10 @@
 package gm.sel;
 
-//import static org.junit.Assert.assertTrue;
-
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.Assert.*;
 import org.testng.annotations.*;
 import org.testng.annotations.Test;
 
 import gm.sel.model.User;
-import gm.sel.pages.HomePage;
 
 public class AuthTest extends TestNgTestBase {
 
@@ -17,16 +12,14 @@ public class AuthTest extends TestNgTestBase {
   public void postConditions() throws Exception {
 	  if (app.getAuthHelper().isLoginIn()){
 		  app.getAuthHelper().logout();
-//		  System.out.println("fuck1");
 	  } else if (app.getAuthHelper().isAuthFormIn()){
 		  app.getAuthHelper().closeAuthForm();
-//		  System.out.println("fuck2");
-	  } else return;
-//		  Assert.assertFalse(app.getAuthHelper().isLoginIn());
+	  };
   }  	
-	
+
   @Test
-  public void testLogInTrue() throws Exception {
+  public void testLogInTrue_2() throws Exception {
+	  System.out.println("testLogInTrue()");
     User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
     app.getAuthHelper().loginAs(user);
 //    Assert.assertFalse("".equals(homepage.header.getText()));
@@ -34,11 +27,81 @@ public class AuthTest extends TestNgTestBase {
   }
   
   @Test
-  public void testLogInEmailEmptyPassEmpty() throws Exception {
+  public void testLogInEmailEmptyPassEmpty_7() throws Exception {
+	  System.out.println("testLogInEmailEmptyPassEmpty()");
 	  User user = new User().setEmail(null).setPass(null);
 	  app.getAuthHelper().loginAs(user);
-	  
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Введите E-mail, на который вы регистрировались"));
   }
   
+  @Test
+  public void testLogInEmailRegistryPassEmpty_5() throws Exception {
+	  System.out.println("testLogInEmailRegiatryPassEmpty()");
+	  User user = new User().setEmail("st.mam_@hotmail.com").setPass(null);
+	  app.getAuthHelper().loginAs(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Введите ваш пароль"));
+  }
 
+  @Test
+  public void testLogInEmailRegistryPassWrong_4(){
+	  //System.out.println("testLogInEmailRegisatryPassWrong()");
+	  User user = new User().setEmail("st.mam@yandex.ru").setPass("22");
+	  app.getAuthHelper().loginAs(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Неправильный пароль. Восстановить"));
+	  Assert.assertTrue(app.getAuthHelper().restorePassLinkVisible());
+	  app.getAuthHelper().restorePass();
+	  Assert.assertTrue(app.getAuthHelper().compareTextStatusMessageInForm("Инструкция по восстановлению отправлена"));
+  }
+  
+  @Test
+  public void testILosePassEmailRegistryPassWrong_3(){
+	  User user = new User().setEmail("st.mam@yandex.ru").setPass("22");
+	  app.getAuthHelper().recoveryPass(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextStatusMessageInForm("Инструкция по восстановлению отправлена"));
+  }
+  
+  @Test
+  public void testILosePassEmailNotRegister_8(){
+	  User user = new User().setEmail("a@a.a").setPass(null);
+	  app.getAuthHelper().recoveryPass(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Пользователь с таким Email не зарегистрирован"));
+  }
+ 
+  @Test
+  public void testILosePassEmailEmptyPassEmpty_9(){
+	  User user = new User().setEmail(null).setPass(null);
+	  app.getAuthHelper().recoveryPass(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Введите E-mail, на который вы регистрировались"));
+  }
+  
+  @Test
+  public void testCreatAccEmailRegister_10(){
+	  User user = new User().setEmail("st.mam@yandex.ru").setPass("22");
+	  app.getAuthHelper().registration(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Пользователь с таким e-mail уже зарегистрирован. Забыли пароль?"));
+	  app.getAuthHelper().restorePass();
+	  Assert.assertTrue(app.getAuthHelper().compareTextStatusMessageInForm("Инструкция по восстановлению отправлена"));
+  }
+  
+  @Test
+  public void testCreatAccEmailValid_11(){
+	  User user = new User().setEmail("a@a.a").setPass(null);
+	  app.getAuthHelper().registration(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Придумайте себе пароль"));
+  }
+  
+  @Test
+  public void testCreatAccEmailEmptyPassEmty_12(){
+	  User user = new User().setEmail(null).setPass(null);
+	  app.getAuthHelper().registration(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Введите E-mail, на который будут приходить покупки"));
+  }
+  
+  @Test
+  public void testCreatAccEmailNotValid_15(){
+	  User user = new User().setEmail("c@c.c").setPass("1");
+	  app.getAuthHelper().registration(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("E-Mail некорректный"));
+  }
+  
 }

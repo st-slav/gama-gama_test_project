@@ -2,16 +2,9 @@ package gm.sel;
 
 import java.io.IOException;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.Capabilities;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
-import ru.stqa.selenium.factory.WebDriverFactory;
-import ru.stqa.selenium.factory.WebDriverFactoryMode;
 import gm.sel.applogic.AppManage;
-import gm.sel.util.PropertyLoader;
 
 /**
  * Base class for TestNG-based test classes
@@ -20,36 +13,14 @@ public class TestNgTestBase {
 	
 	protected AppManage app;
 
-/*  protected static String gridHubUrl;
-  protected static String baseUrl;
-  protected static Capabilities capabilities;
-
-  protected WebDriver driver;*/
-
   @BeforeSuite
   public void init() throws IOException {
 	  app = new AppManage(); 
   }
-/*  public void initTestSuite() throws IOException {
-    baseUrl = PropertyLoader.loadProperty("site.url");
-    gridHubUrl = PropertyLoader.loadProperty("grid.url");
-    if ("".equals(gridHubUrl)) {
-      gridHubUrl = null;
-    }
-    capabilities = PropertyLoader.loadCapabilities();
-    WebDriverFactory.setMode(WebDriverFactoryMode.THREADLOCAL_SINGLETON);
-  }
-
-  @BeforeMethod
-  public void initWebDriver() {
-    driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
-  }*/
 
   @AfterSuite//(alwaysRun = true)
   public void stop() {
 	  app.stop();
   }
-  /*public void tearDown() {
-    WebDriverFactory.dismissAll();
-  }*/
+
 }

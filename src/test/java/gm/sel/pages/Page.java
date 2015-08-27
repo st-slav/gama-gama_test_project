@@ -1,6 +1,6 @@
 package gm.sel.pages;
 
-import org.openqa.selenium.TimeoutException;
+//import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,7 +21,7 @@ public abstract class Page {
   public Page(PageManage pages) {
 	  this.pages = pages;
 	  driver = pages.getWebDriver();
-	  wait = new WebDriverWait(driver, 30); 
+	  wait = new WebDriverWait(driver, 10); 
   }
   
   public Page(WebDriver driver) {
@@ -31,7 +31,7 @@ public abstract class Page {
   public String getTitle() {
     return driver.getTitle();
   }
-  
+  /*
   //ждёт загрузки страницы и возвращает её имя
   public Page ensurePageLoaded() {
 	  return this;
@@ -61,4 +61,5 @@ public abstract class Page {
 		  return false;
 	  }
 	}
+	*/
 }

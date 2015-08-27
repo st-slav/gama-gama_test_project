@@ -1,9 +1,6 @@
 package gm.sel.applogic;
 
-import java.io.IOException;
-
 import org.openqa.selenium.TimeoutException;
-
 import gm.sel.model.User;
 
 public class AuthHelper extends DriverHelper {
@@ -27,7 +24,8 @@ public class AuthHelper extends DriverHelper {
 	}
 	
 	public boolean compareTextErrorMessageInForm(String text){
-		return pages.homePage.getTextErrorMessageInForm() == text;
+		System.out.println(pages.homePage.ensureErrorAuthForm().getTextErrorMessageInForm());
+		return pages.homePage.ensureErrorAuthForm().getTextErrorMessageInForm().equals(text);
 	}
 	
 	public boolean isLoginIn(){
@@ -56,4 +54,34 @@ public class AuthHelper extends DriverHelper {
 			return false;
 		}
 	}
+	
+	public boolean restorePassLinkVisible() {
+		try{
+			pages.homePage.ensureElementRestorePassLink();
+			return true;
+		} catch (TimeoutException to){
+			return false;
+		}
+	}
+	
+	public void restorePass(){
+		pages.homePage.clickRestorePassLink();
+		pages.homePage.ensureStatusMessageAuthForm();
+	}
+	
+	public boolean compareTextStatusMessageInForm(String text){
+		System.out.println(pages.homePage.ensureStatusMessageAuthForm().getTextStatusMessageInForm());
+		return pages.homePage.ensureStatusMessageAuthForm().getTextStatusMessageInForm().equals(text);
+	}
+
+	public void recoveryPass(User user) {
+		this.inputDataiInForm(user);
+		pages.homePage.clicILosePassLink();	
+	}
+
+	public void registration(User user) {
+		this.inputDataiInForm(user);
+		pages.homePage.clickCreateAccount();
+	}
+	
 }
