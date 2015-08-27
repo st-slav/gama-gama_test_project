@@ -90,7 +90,7 @@ public class HomePage extends Page {
 	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='cboxContent']//div[@class='status-error' and not (text())]")));
 	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='cboxContent']//div[@class='status-message' and (text())]")));
 	  try {
-		  TimeUnit.SECONDS.sleep(5);
+		  TimeUnit.SECONDS.sleep(6);
 	  } catch (InterruptedException e) {
 		  e.printStackTrace();
 	  }
