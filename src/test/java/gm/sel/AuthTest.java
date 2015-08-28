@@ -12,12 +12,11 @@ public class AuthTest extends TestNgTestBase {
   public void postConditions() throws Exception {
 	  if (app.getAuthHelper().isAuthFormIn()){
 		  app.getAuthHelper().closeAuthForm();
-	  } else if ( app.getAuthHelper().isLoginIn()){
-		  
+	  } else if ( app.getAuthHelper().isLoginIn()){		  
 		  app.getAuthHelper().logout();
-	  };
+	  }
   }  	
-  
+ 
   @Test
   public void testLogInEmailEmptyPassEmpty_7() throws Exception {
 	  User user = new User().setEmail(null).setPass(null);
@@ -94,7 +93,7 @@ public class AuthTest extends TestNgTestBase {
   }
   
   @Test
-  public void testLogInTrue_2() throws Exception {
+  public void atestLogInTrue_2() throws Exception {
     User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
     app.getAuthHelper().loginAs(user);
     Assert.assertTrue(app.getAuthHelper().isLoginIn());

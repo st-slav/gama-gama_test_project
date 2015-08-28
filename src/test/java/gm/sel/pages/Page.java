@@ -1,8 +1,10 @@
 package gm.sel.pages;
 
 //import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 /**
  * Abstract class representation of a Page in the UI. Page object pattern
@@ -30,6 +32,10 @@ public abstract class Page {
 
   public String getTitle() {
     return driver.getTitle();
+  }
+  
+  protected void waiter(String xpathLocator){
+	  wait.until(presenceOfElementLocated(By.xpath(xpathLocator)));
   }
   /*
   //ждёт загрузки страницы и возвращает её имя

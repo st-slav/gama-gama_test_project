@@ -69,7 +69,6 @@ public class AuthHelper extends DriverHelper {
 	}
 	
 	public boolean compareTextStatusMessageInForm(String text){
-		System.out.println(pages.homePage.ensureStatusMessageAuthForm().getTextStatusMessageInForm());
 		return pages.homePage.ensureStatusMessageAuthForm().getTextStatusMessageInForm().equals(text);
 	}
 
