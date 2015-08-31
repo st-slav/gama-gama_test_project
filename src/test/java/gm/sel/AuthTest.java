@@ -16,7 +16,7 @@ public class AuthTest extends TestNgTestBase {
 		  app.getAuthHelper().logout();
 	  }
   }  	
- 
+  
   @Test
   public void testLogInEmailEmptyPassEmpty_7() throws Exception {
 	  User user = new User().setEmail(null).setPass(null);
@@ -98,5 +98,21 @@ public class AuthTest extends TestNgTestBase {
     app.getAuthHelper().loginAs(user);
     Assert.assertTrue(app.getAuthHelper().isLoginIn());
   }
+  
+  @Test
+  public void testCreatAccEmailVlidPassGood_1(){
+	  User user = new User().setEmail(app.getAuthHelper().emailGenerate()).setPass("11");
+	  app.getAuthHelper().registration(user);
+	  Assert.assertTrue(app.getAuthHelper().isLoginIn());
+  }
 
+  @Test
+  public void testLogInEmailNotRegister_6(){
+	  User user = new User().setEmail(app.getAuthHelper().emailGenerate()).setPass("11");
+	  app.getAuthHelper().loginAs(user);
+	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Такого пользователя не существует. Создать с этим паролем"));
+	  app.getAuthHelper().registerWithPassLink();
+	  Assert.assertTrue(app.getAuthHelper().isLoginIn());
+	  
+  }
 }

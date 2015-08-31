@@ -37,35 +37,4 @@ public abstract class Page {
   protected void waiter(String xpathLocator){
 	  wait.until(presenceOfElementLocated(By.xpath(xpathLocator)));
   }
-  /*
-  //ждёт загрузки страницы и возвращает её имя
-  public Page ensurePageLoaded() {
-	  return this;
-  }
-  
-  //ждёт загрузки страницы и возвращает 1 или 0
-  public boolean waitPageLoaded() {
-	  try {
-		  ensurePageLoaded();
-		  return true;
-	  } catch (TimeoutException to) {
-		  return false;
-	  }
-	}
-  
-  //ждёт ждёт появление элемента и возвращает имя стрницы
-  public Page ensureElementVisible() {
-	  return this;
-  }
-  
-  //ждёт появление элемента и возвращает 1 или 0
-  public boolean waitElementVisible() {
-	  try {
-		  ensureElementVisible();
-		  return true;
-	  } catch (TimeoutException to) {
-		  return false;
-	  }
-	}
-	*/
 }

@@ -1,10 +1,9 @@
 package gm.sel.pages;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+//import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 /**
@@ -102,6 +101,13 @@ public class HomePage extends Page {
 	  restorePassLink.click();
   }
   
+  @FindBy(xpath = "//a[@class='noreload auth_create-account' and @href='#']")
+  private WebElement registerWithPassLink;
+  
+  public void clickRegisterWithPassLink(){
+	  registerWithPassLink.click();
+  }
+  
   public HomePage ensureErrorAuthForm(){
 	  waiter("//div[@id='cboxContent']//div[@class='status-error' and (text())]");
 	  waiter("//div[@id='cboxContent']//div[@class='status-message' and not (text())]");
@@ -109,8 +115,8 @@ public class HomePage extends Page {
   }
   
   public HomePage ensureStatusMessageAuthForm(){
-	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='cboxContent']//div[@class='status-error' and not (text())]")));
-	  wait.until(presenceOfElementLocated(By.xpath("//div[@id='cboxContent']//div[@class='status-message' and (text())]")));
+	  waiter("//div[@id='cboxContent']//div[@class='status-error' and not (text())]");
+	  waiter("//div[@id='cboxContent']//div[@class='status-message' and (text())]");
 	  try {
 		  TimeUnit.SECONDS.sleep(4);
 	  } catch (InterruptedException e) {
@@ -120,7 +126,6 @@ public class HomePage extends Page {
   }
   
   public HomePage ensurePageLoaded(){
-//	  super.ensurePageLoaded();
 	  waiter("//iframe[@title='fb:like_box Facebook Social Plugin']");
 	  waiter("//div[@id='top_back']//a[@href='javascript:GamaGama.UI.showAuthForm();']");
 	  waiter("//div[@id='top_back']//a[@href='javascript:GamaGama.UI.showRegisterForm();']");
@@ -129,20 +134,18 @@ public class HomePage extends Page {
   }  
 
   public HomePage ensurePageLoadedLogIn(){
-//	  super.ensurePageLoaded();
-	  wait.until(presenceOfElementLocated(By.xpath("//iframe[@title='fb:like_box Facebook Social Plugin']")));
-	  wait.until(presenceOfElementLocated(By.xpath("//a[@href='/personal/settings/']")));
+	  waiter("//iframe[@title='fb:like_box Facebook Social Plugin']");
+	  waiter("//a[@href='/personal/settings/']");
 	  return this;	  
   }
   
   public HomePage ensureAuthFormVisibl(){
-//	  super.ensureElementVisible();
-	  wait.until(visibilityOfElementLocated(By.xpath("//div[@id='cboxContent']/div[@id='cboxLoadedContent']/div[@id='authblock']")));
+	  waiter("//div[@id='cboxContent']/div[@id='cboxLoadedContent']/div[@id='authblock']");
 	  return this;
   }
   
   public HomePage ensureElementRestorePassLink(){
-	  wait.until(presenceOfElementLocated(By.xpath("//a[@class='noreload auth_remind-password' and @href='#']")));
+	  waiter("//a[@class='noreload auth_remind-password' and @href='#']");
 	  return this;
   }
   
