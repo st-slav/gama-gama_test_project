@@ -113,7 +113,5 @@ public class AuthTest extends TestNgTestBase {
 	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Такого пользователя не существует. Создать с этим паролем"));
 	  app.getAuthHelper().registerWithPassLink();
 	  Assert.assertTrue(app.getAuthHelper().isLoginIn());	  
-  }
-
-  
+  }  
 }
