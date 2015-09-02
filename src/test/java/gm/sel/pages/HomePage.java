@@ -67,8 +67,9 @@ public class HomePage extends Page {
   @FindBy(xpath = "//div[@id='authblock']//button[@class='btn-small btn-blue auth_submit-block js-login']")
   private WebElement enterButton;
   
-  public void clickEnterButton() {
+  public HomePage clickEnterButton() {
 	  enterButton.click();
+	  return this;
   }
   
   @FindBy(xpath = "//div[@id='top_back']//a[@class='white logout' and @href='#']")
@@ -107,6 +108,22 @@ public class HomePage extends Page {
   public void clickRegisterWithPassLink(){
 	  registerWithPassLink.click();
   }
+  
+  @FindBy(xpath = "//div[@id='authblock']//input[@name='StaySignedIn']")
+  private WebElement rememberMeChekbox;
+  
+  public HomePage checkRememberMeChekbox(){
+	  if (rememberMeChekbox.isEnabled())
+	  rememberMeChekbox.click();
+	  return this;
+  }
+  
+  public HomePage uncheckRememberMeChekbox(){
+	  if (!rememberMeChekbox.isEnabled())
+	  rememberMeChekbox.click();
+	  return this;
+  }
+ 
   
   public HomePage ensureErrorAuthForm(){
 	  waiter("//div[@id='cboxContent']//div[@class='status-error' and (text())]");

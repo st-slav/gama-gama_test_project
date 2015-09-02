@@ -93,7 +93,7 @@ public class AuthTest extends TestNgTestBase {
   }
   
   @Test
-  public void atestLogInTrue_2() throws Exception {
+  public void testLogInTrue_2() throws Exception {
     User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
     app.getAuthHelper().loginAs(user);
     Assert.assertTrue(app.getAuthHelper().isLoginIn());
@@ -112,7 +112,16 @@ public class AuthTest extends TestNgTestBase {
 	  app.getAuthHelper().loginAs(user);
 	  Assert.assertTrue(app.getAuthHelper().compareTextErrorMessageInForm("Такого пользователя не существует. Создать с этим паролем"));
 	  app.getAuthHelper().registerWithPassLink();
-	  Assert.assertTrue(app.getAuthHelper().isLoginIn());
+	  Assert.assertTrue(app.getAuthHelper().isLoginIn());	  
+  }
+ /*
+  @Test
+  public void testRememberMenter_14(){
+	  User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
+	  app.getAuthHelper().loginAs(user);
+	  app.getAuthHelper().isLoginIn();
+	  app.getNavigationHelper().easyStop();
 	  
   }
+  */
 }

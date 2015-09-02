@@ -13,6 +13,7 @@ import ru.stqa.selenium.factory.WebDriverFactoryMode;
 public class AppManage {
 	
 	private AuthHelper authHelper;
+	private NavigationHelper navHelper;
 	
 	private WebDriver driver;
 	private String baseUrl;
@@ -32,12 +33,22 @@ public class AppManage {
 	    driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
 	    
 	    authHelper = new AuthHelper(this);
+	    navHelper = new NavigationHelper(this);
 	    
-	    driver.get(baseUrl);
+	    getNavigationHelper().openMainPage();
+	    //driver.get(baseUrl);
 	}
 	
 	public AuthHelper getAuthHelper(){
 		return authHelper;
+	}
+	
+	public NavigationHelper getNavigationHelper(){
+		return navHelper;
+	}
+	
+	protected String getBaseUrl() {
+		  return baseUrl;
 	}
 	
 	protected WebDriver getWebDriver() {

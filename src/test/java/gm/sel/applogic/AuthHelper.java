@@ -95,5 +95,5 @@ public class AuthHelper extends DriverHelper {
 	public String emailGenerate() {
 		return new BigInteger(60, new SecureRandom()).toString(32)+"@bbbb.ru";
 	}
-	
+
 }
