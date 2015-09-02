@@ -16,9 +16,4 @@ public class NavigationHelper extends DriverHelper  {
 	  public void easyStop(){
 		driver.close();
 	  }
-	  
-	  public void openNewWindow(){
-		  //driver.
-	  }
-
 }

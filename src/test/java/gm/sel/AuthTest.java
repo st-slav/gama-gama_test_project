@@ -16,7 +16,7 @@ public class AuthTest extends TestNgTestBase {
 		  app.getAuthHelper().logout();
 	  }
   }  	
-  
+
   @Test
   public void testLogInEmailEmptyPassEmpty_7() throws Exception {
 	  User user = new User().setEmail(null).setPass(null);
@@ -114,14 +114,6 @@ public class AuthTest extends TestNgTestBase {
 	  app.getAuthHelper().registerWithPassLink();
 	  Assert.assertTrue(app.getAuthHelper().isLoginIn());	  
   }
- /*
-  @Test
-  public void testRememberMenter_14(){
-	  User user = new User().setEmail("st.mam_@hotmail.com").setPass("1");
-	  app.getAuthHelper().loginAs(user);
-	  app.getAuthHelper().isLoginIn();
-	  app.getNavigationHelper().easyStop();
-	  
-  }
-  */
+
+  
 }

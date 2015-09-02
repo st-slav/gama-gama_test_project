@@ -36,7 +36,6 @@ public class AppManage {
 	    navHelper = new NavigationHelper(this);
 	    
 	    getNavigationHelper().openMainPage();
-	    //driver.get(baseUrl);
 	}
 	
 	public AuthHelper getAuthHelper(){

@@ -16,7 +16,6 @@ public class AuthHelper extends DriverHelper {
 	public void loginAs(User user) {
 		this.inputDataiInForm(user);
 		pages.homePage.clickEnterButton();
-			//.ensurePageLoadedLogIn();
 	  }
 	
 	public void inputDataiInForm(User user){
@@ -28,7 +27,7 @@ public class AuthHelper extends DriverHelper {
 	}
 	
 	public boolean compareTextErrorMessageInForm(String text){
-		System.out.println(pages.homePage.ensureErrorAuthForm().getTextErrorMessageInForm());
+		//System.out.println(pages.homePage.ensureErrorAuthForm().getTextErrorMessageInForm());
 		return pages.homePage.ensureErrorAuthForm().getTextErrorMessageInForm().equals(text);
 	}
 	
